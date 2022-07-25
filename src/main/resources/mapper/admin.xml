@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.myframe.dao.AdminDao">
+
+    <select id="getAll" resultType="com.example.myframe.entity.AdminBean">
+    SELECT * from admin
+    </select>
+
+    <select id="getPage" resultType="com.example.myframe.entity.AdminBean">
+        SELECT * from admin where (name LIKE concat('%',#{selectStr},'%')  or level  like concat('%',#{selectStr},'%'))
+    </select>
+
+    <insert id="addAdmin" parameterType="com.example.myframe.entity.AdminBean">
+        insert into admin(name,password,level,create_date,sex,age) values(#{name},#{password},#{level},now(),#{sex},#{age})
+    </insert>
+
+    <update id="edit" parameterType="com.example.myframe.entity.AdminBean">
+        update admin set level=#{level} where id=#{id}
+    </update>
+
+    <select id="getByName" resultType="com.example.myframe.entity.AdminBean" parameterType="String">
+         SELECT * from admin where name=#{name}
+    </select>
+
+    <update id="editPwd" parameterType="com.example.myframe.entity.AdminBean">
+        update admin set password=#{password} where name=#{name}
+    </update>
+</mapper>
+

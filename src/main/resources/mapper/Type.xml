@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.myframe.dao.TypeDao">
+
+    <select id="getAll" resultType="com.example.myframe.entity.TypeBean">
+    select * from type where memo='修理工'
+    </select>
+	<select id="getPage" resultType="com.example.myframe.entity.TypeBean">
+    select * from type where
+    (content LIKE concat('%',#{selectStr},'%')  or memo  like concat('%',#{selectStr},'%'))
+	</select>
+
+    <insert id="addType" parameterType="com.example.myframe.entity.TypeBean">
+        insert into type(content,create_date,update_date,memo) VALUES (#{content},now(),now(),#{memo})
+    </insert>
+
+</mapper>
+
